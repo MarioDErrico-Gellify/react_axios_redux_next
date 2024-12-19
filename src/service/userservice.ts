@@ -1,6 +1,10 @@
 import axios from "axios";
 
-export async function fetchUser(params: Inputs) {
+export async function fetchUser(params: {
+  name: string;
+  surname: string;
+  age: number;
+}) {
   try {
     const response = await axios.post(
       //JSONPlaceholder, servizio gratuito che simula un'API RESTful.

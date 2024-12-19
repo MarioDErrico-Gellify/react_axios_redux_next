@@ -1,16 +1,15 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Form } from "react-hook-form";
 import "./styles.css";
-import Card from "./card/card.tsx";
-import Form from "./form/form.tsx";
 
+import React, { useEffect, useState } from "react";
+import Card from "./card/card";
 import {
   Container,
   Header,
   CardsContainer,
   Button,
   NameDisplay,
-} from "./card/style.tsx";
-import React, { useEffect, useState } from "react";
+} from "./card/style";
 
 export default function App() {
   const [name, setName] = useState("Mario");

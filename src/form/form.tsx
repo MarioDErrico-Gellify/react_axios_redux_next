@@ -1,19 +1,17 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { object, string, number, InferType } from "yup";
+import { object, InferType } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import React, { useState } from "react";
-import { fetchUser } from "/src/service/userservice.ts";
+import { useState } from "react";
 
+import { fetchUser } from "../service/userservice.js";
 import {
+  Input,
   InputContainer,
   Label,
-  Input,
-  ReferenceError,
-  SubmitContainer,
   SubmitButton,
-  Error,
-} from "./style.tsx";
+  SubmitContainer,
+} from "./style.js";
 
 //---------------------------------------
 
@@ -54,17 +52,17 @@ function Form() {
       <InputContainer>
         <Label>Name</Label>
         <Input type="string" {...register("name")} />
-        {errors.name && <Error>{errors.name.message}</Error>}
+        {errors.name && <h1>{errors.name.message}</h1>}
       </InputContainer>
       <InputContainer>
         <Label>Surname</Label>
         <Input {...register("surname")} />
-        {errors.surname && <Error>{errors.surname.message}</Error>}
+        {errors.surname && <h1>{errors.surname.message}</h1>}
       </InputContainer>
       <InputContainer>
         <Label>Age</Label>
         <Input {...register("age")} />
-        {errors.age && <Error>{errors.age.message}</Error>}
+        {errors.age && <h1>{errors.age.message}</h1>}
       </InputContainer>
       <SubmitContainer>
         <SubmitButton type="submit" value="Submit" />
