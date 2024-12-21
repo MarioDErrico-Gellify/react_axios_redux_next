@@ -25,7 +25,7 @@ export function useNavigationLinks() {
     { link: Paths.PAGETREE, label: "api shocase" },
     { link: Paths.PAGETWO, label: "hook showcase" },
   ];
-
+  //object to be destructured with { links, isLinkActive }
   return {
     links,
     isLinkActive,
