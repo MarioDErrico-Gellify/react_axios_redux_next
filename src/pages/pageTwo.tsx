@@ -20,7 +20,7 @@ export default function PageTwo() {
     setCount((prevCount) => prevCount + 1);
   }, [name]);
 
-  //this use memo hook add upper case to nameArrayObj
+  // This useMemo hook adds upper case to nameArrayObj
   const upperCaseNames = useMemo(() => {
     return nameArrayObj.map((person) => ({
       ...person,
@@ -32,24 +32,22 @@ export default function PageTwo() {
     <>
       <Navigation />
       <CardForPageTwoinfo
-        titleOne={"hook show case"}
+        titleOne={"Hook Showcase"}
         titleTwo={name}
-        titleTree={"you use this props" + count + "times"}
-        name={"your value"}
-      ></CardForPageTwoinfo>
-      {upperCaseNames.map((value, index) => (
-        <h1
-          key={index}
-          onClick={() => {
-            setName(value.name + index);
-          }}
-        >
-          {value.name} {value.surname}
-        </h1>
-      ))}
+        titleTree={`You used this prop ${count} times`}
+        name={"Your Value"}
+      >
+        {upperCaseNames.map((value, index) => (
+          <h1
+            key={index}
+            onClick={() => {
+              setName(value.name + index);
+            }}
+          >
+            {value.name} {value.surname}
+          </h1>
+        ))}
+      </CardForPageTwoinfo>
     </>
   );
-}
-function useTranslation(): { t: any } {
-  throw new Error("Function not implemented.");
 }
