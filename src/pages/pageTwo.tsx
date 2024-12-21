@@ -15,9 +15,9 @@ export default function PageTwo() {
   ];
 
   useEffect(() => {
-    if (name === "") {
+    name === "" &&
       setName("randomic message " + getRandomNumber(0, 10).toString());
-    }
+
     setCount((prevCount) => prevCount + 1);
   }, [name]);
 
@@ -26,6 +26,7 @@ export default function PageTwo() {
     return nameArrayObj.map((person) => ({
       ...person,
       name: person.name.toUpperCase(),
+      surname: person.surname.toUpperCase(),
     }));
   }, [nameArrayObj]);
 
