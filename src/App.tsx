@@ -1,3 +1,8 @@
+/**
+ * Author: Mario D'Errico
+ * Date: 22/12/2024
+ * Domain: humans.tech showcase
+ */
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./styles.css";
 import { DefaultPath, Paths } from "./hook/useNavigation";

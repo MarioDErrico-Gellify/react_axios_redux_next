@@ -7,7 +7,8 @@ export async function fetchUser(params: {
 }) {
   try {
     const response = await axios.post(
-      //JSONPlaceholder, servizio gratuito che simula un'API RESTful.
+      //JSONPlaceholder, RESTFULL API SIMULATED WIHT FREE SERVICE.
+      //TODO...CREATE FORM AND INJECT THIS HOOK
       "https://jsonplaceholder.typicode.com/posts",
       params
     );

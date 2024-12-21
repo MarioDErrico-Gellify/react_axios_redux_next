@@ -13,7 +13,7 @@ function Navigation() {
             key={link.link}
             style={{
               fontWeight: isLinkActive(link) ? "bold" : "normal",
-              color: isLinkActive(link) ? "blue" : "black",
+              color: isLinkActive(link) ? "red" : "black",
             }}
           >
             <Link to={link.link}>{link.label}</Link>
