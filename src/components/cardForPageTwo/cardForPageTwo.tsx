@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { Container, StyledParagraph } from "./style";
 
 export interface CardProps {
@@ -5,6 +6,7 @@ export interface CardProps {
   titleTwo: string;
   titleTree: string | number;
   name: string;
+  children?: ReactNode; // Add children prop
 }
 
 function CardForPageTwoinfo({
@@ -12,6 +14,7 @@ function CardForPageTwoinfo({
   titleTwo,
   titleTree,
   name,
+  children,
 }: CardProps) {
   return (
     <Container>
@@ -20,6 +23,7 @@ function CardForPageTwoinfo({
         {titleTwo} {name}
       </StyledParagraph>
       <StyledParagraph>{titleTree}</StyledParagraph>
+      <div>{children}</div> {/* Render children */}
     </Container>
   );
 }
