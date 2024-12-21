@@ -18,7 +18,10 @@
     "react-router-dom": "^7.1.0",
     "react-scripts": "5.0.1",
     "styled-components": "6.1.13",
-    "yup": "1.6.1"
+    "yup": "1.6.1",
+    "i18next": "^23.10.1",
+    "i18next-browser-languagedetector": "^7.2.0",
+    "i18next-http-backend": "^2.5.0",
   },
   "devDependencies": {
     "@types/react": "18.2.38",
