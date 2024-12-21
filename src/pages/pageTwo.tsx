@@ -1,12 +1,11 @@
 import { useEffect, useState, useMemo } from "react";
 import Navigation from "../components/navigation";
 import { getRandomNumber } from "../utils/randomNumber";
-import { useTranslation } from "react-i18next";
+import CardForPageTwoinfo from "../components/cardForPageTwo/cardForPageTwo";
 
 export default function PageTwo() {
   const [name, setName] = useState<string>("");
   const [count, setCount] = useState<number>(-3);
-  const { t } = useTranslation();
 
   const nameArrayObj = [
     { name: "mario", surname: "d'errico" },
@@ -32,10 +31,12 @@ export default function PageTwo() {
   return (
     <>
       <Navigation />
-      {/*TODO ADD COMPONENT*/}
-      <p>This is a page for hook showcase</p>
-      <p>The name of hook is {name}</p>
-      <p>Changed this props {count} times</p>
+      <CardForPageTwoinfo
+        titleOne={"hook show case"}
+        titleTwo={name}
+        titleTree={"you use this props" + count + "times"}
+        name={"your value"}
+      ></CardForPageTwoinfo>
       {upperCaseNames.map((value, index) => (
         <h1
           key={index}
