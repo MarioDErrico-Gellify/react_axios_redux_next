@@ -26,7 +26,6 @@ export default function PageTwo() {
     return users.map((user) => ({
       ...user,
       firstName: user.firstName.toUpperCase(),
-      lastName: user.lastName.toUpperCase(),
     }));
   }, [users]);
 
