@@ -1,10 +1,13 @@
 import { useEffect, useState, useMemo } from "react";
 import Navigation from "../components/navigation";
 import { getRandomNumber } from "../utils/randomNumber";
+import { useTranslation } from "react-i18next";
 
 export default function PageTwo() {
   const [name, setName] = useState<string>("");
-  const [count, setCount] = useState<number>(-1);
+  const [count, setCount] = useState<number>(-3);
+  const { t } = useTranslation();
+
   const nameArrayObj = [
     { name: "mario", surname: "d'errico" },
     { name: "michele", surname: "simeone" },
@@ -29,6 +32,7 @@ export default function PageTwo() {
   return (
     <>
       <Navigation />
+      {/*TODO ADD COMPONENT*/}
       <p>This is a page for hook showcase</p>
       <p>The name of hook is {name}</p>
       <p>Changed this props {count} times</p>
@@ -44,4 +48,7 @@ export default function PageTwo() {
       ))}
     </>
   );
+}
+function useTranslation(): { t: any } {
+  throw new Error("Function not implemented.");
 }
