@@ -1,4 +1,5 @@
-import Navigation from "../components/navigation";
+import Navigation from "../components/navigationMenu/navigation";
+
 
 export default function pageTree() {
   return (

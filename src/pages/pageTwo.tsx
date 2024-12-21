@@ -1,7 +1,8 @@
 import { useEffect, useState, useMemo } from "react";
-import Navigation from "../components/navigation";
+
 import { getRandomNumber } from "../utils/randomNumber";
 import CardForPageTwoinfo from "../components/cardForPageTwo/cardForPageTwo";
+import Navigation from "../components/navigationMenu/navigation";
 
 export default function PageTwo() {
   const [name, setName] = useState<string>("");

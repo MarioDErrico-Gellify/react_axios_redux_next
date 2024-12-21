@@ -1,4 +1,5 @@
-import Navigation from "../components/navigation";
+import Navigation from "../components/navigationMenu/navigation";
+
 //this is a referral page, this show only navigation menu
 function pageOne() {
   return (

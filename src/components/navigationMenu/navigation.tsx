@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useNavigationLinks } from "../../hook/useNavigation";
-import { Li, Nav, Ul } from "../styleNavigation";
+import { Nav, Ul, Li } from "./styleNavigation";
 
 function Navigation() {
   const { links, isLinkActive } = useNavigationLinks();
