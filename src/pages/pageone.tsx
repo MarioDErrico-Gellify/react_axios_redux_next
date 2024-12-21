@@ -1,4 +1,6 @@
+import Navigation from "../components/navigation";
+
 function pageOne() {
-  return <h2>this is page one</h2>;
+  return <Navigation></Navigation>;
 }
 export default pageOne;
