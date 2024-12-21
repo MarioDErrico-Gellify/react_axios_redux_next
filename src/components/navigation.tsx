@@ -1,15 +1,24 @@
-import { useNavigate, useNavigation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useNavigationLinks } from "../hook/useNavigation";
 import { Li, Nav, Ul } from "./styleNavigation";
-import { Paths } from "../hook/useNavigation";
 
 function Navigation() {
-  const navigate = useNavigate();
+  const { links, isLinkActive } = useNavigationLinks();
 
   return (
     <Nav>
       <Ul>
-        <Li onClick={() => navigate(Paths.PAGETWO)}>Page Two</Li>
-        <Li onClick={() => navigate(Paths.PAGETREE)}>Page Three</Li>
+        {links.map((link) => (
+          <Li
+            key={link.link}
+            style={{
+              fontWeight: isLinkActive(link) ? "bold" : "normal",
+              color: isLinkActive(link) ? "blue" : "black",
+            }}
+          >
+            <Link to={link.link}>{link.label}</Link>
+          </Li>
+        ))}
       </Ul>
     </Nav>
   );

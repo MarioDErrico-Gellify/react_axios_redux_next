@@ -15,15 +15,15 @@ export const DefaultPath = Paths.PAGEONE;
 
 export function useNavigationLinks() {
   const location = useLocation();
-
+  //this function return current active link
   function isLinkActive(link: NavigationLink | string) {
     if (typeof link == "string") return location.pathname.startsWith(link);
     return location.pathname.startsWith(link.link);
   }
 
   const links: NavigationLink[] = [
-    { link: Paths.PAGEONE, label: "PAGE ONE" },
-    { link: Paths.PAGETWO, label: "PAGE TWO" },
+    { link: Paths.PAGETREE, label: "api shocase" },
+    { link: Paths.PAGETWO, label: "hook showcase" },
   ];
 
   return {
