@@ -36,7 +36,7 @@ export default function PageTwo() {
       <CardForPageTwoinfo
         titleOne={"Hook Showcase"}
         titleTwo={name}
-        titleTree={`You used this prop ${count} times`}
+        titleTree={`You used this hook ${count} times`}
         name={"Your Value"}
       >
         {upperCaseNames.map((value, index) => (
