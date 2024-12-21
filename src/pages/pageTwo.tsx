@@ -8,27 +8,27 @@ export default function PageTwo() {
   const [name, setName] = useState<string>("");
   const [count, setCount] = useState<number>(-3);
 
-  const nameArrayObj = [
-    { name: "mario", surname: "d'errico" },
-    { name: "michele", surname: "simeone" },
-    { name: "giovanni", surname: "bianchi" },
+  const users = [
+    { firstName: "Emma", lastName: "Taylor" },
+    { firstName: "Liam", lastName: "Williams" },
+    { firstName: "Olivia", lastName: "Jones" },
   ];
 
   useEffect(() => {
-    name === "" &&
-      setName("randomic message " + getRandomNumber(0, 10).toString());
+    if (name === "") {
+      setName("Random message " + getRandomNumber(0, 10).toString());
+    }
 
     setCount((prevCount) => prevCount + 1);
   }, [name]);
 
-  // This useMemo hook adds upper case to nameArrayObj
   const upperCaseNames = useMemo(() => {
-    return nameArrayObj.map((person) => ({
-      ...person,
-      name: person.name.toUpperCase(),
-      surname: person.surname.toUpperCase(),
+    return users.map((user) => ({
+      ...user,
+      firstName: user.firstName.toUpperCase(),
+      lastName: user.lastName.toUpperCase(),
     }));
-  }, [nameArrayObj]);
+  }, [users]);
 
   return (
     <>
@@ -36,19 +36,18 @@ export default function PageTwo() {
       <CardForPageTwoinfo
         titleOne={"Hook Showcase"}
         titleTwo={name}
-        titleTree={`You used this hook ${count} times`}
+        titleTree={`You have used this hook ${count} times`}
         name={"Your Value"}
       >
-        {upperCaseNames.map((value, index) => (
+        {upperCaseNames.map((user, index) => (
           <h1
-            // inline css{old school practice}
             style={{ cursor: "pointer" }}
             key={index}
             onClick={() => {
-              setName(value.name + index);
+              setName(user.firstName + " & index value: " + index);
             }}
           >
-            {value.name} {value.surname}
+            {user.firstName} {user.lastName}
           </h1>
         ))}
       </CardForPageTwoinfo>
