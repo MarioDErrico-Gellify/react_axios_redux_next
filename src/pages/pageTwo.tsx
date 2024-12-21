@@ -39,6 +39,8 @@ export default function PageTwo() {
       >
         {upperCaseNames.map((value, index) => (
           <h1
+            // inline css{old school practice}
+            style={{ cursor: "pointer" }}
             key={index}
             onClick={() => {
               setName(value.name + index);
