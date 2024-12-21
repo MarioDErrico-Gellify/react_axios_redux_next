@@ -39,7 +39,6 @@ export default function App() {
       </CardsContainer>
       <Button onClick={() => setName("random")}>Change My Name</Button>
       <NameDisplay>{name}</NameDisplay>
-      <Form></Form>
     </Container>
   );
 }
