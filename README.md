@@ -2,7 +2,7 @@
 
 # Created with CodeSandbox
 
-This repository is a showcase project developed as part of my application process for a potential role at humans.tech. The project is currently a work in progress, and I am continuously working on enhancing its features and functionality. The purpose of this project is to demonstrate my skills in React, hooks, routing, and internationalization (i18n), as well as my ability to work with APIs using Axios.
+The project is currently a work in progress, and I am continuously working on enhancing its features and functionality. The purpose of this project is to demonstrate my skills in React, hooks, routing, and internationalization (i18n), as well as my ability to work with APIs using Axios.
 
 # ShowCase
 
