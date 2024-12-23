@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { constants } from "../../Lib/constants";
-import { fetchUser } from "../../service/userservice";
+import { registerUser } from "../../service/userservice";
 import { useState } from "react";
 import {
   FormWrapper,
@@ -21,7 +21,7 @@ function RegisterForm() {
   } = useForm<registerFormDto>();
 
   async function addUser(data: registerFormDto) {
-    const response = await fetchUser(data)
+    const response = await registerUser(data)
       .then((response) => {
         setNoficationMessage(
           `User added: ${response.name} ${response.surname}`
