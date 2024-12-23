@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import Navigation from "../components/navigationMenu/navigation";
-import React from "react";
 
 //this is a referral page, this show only navigation menu
 function pageOne() {

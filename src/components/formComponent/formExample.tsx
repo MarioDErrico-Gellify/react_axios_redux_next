@@ -2,6 +2,15 @@ import { useForm } from "react-hook-form";
 import { constants } from "../../Lib/constants";
 import { fetchUser } from "../../service/userservice";
 import { useState } from "react";
+import {
+  FormWrapper,
+  InputGroup,
+  Label,
+  Input,
+  ErrorMessage,
+  Button,
+} from "./style";
+import { registerFormDto } from "../../service/userTypes";
 
 function RegisterForm() {
   const [notificationMessage, setNoficationMessage] = useState<string>();
@@ -9,71 +18,83 @@ function RegisterForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<registerFormDto>();
 
-  async function addUser(data: any) {
-    const userAdd = await fetchUser(data)
+  async function addUser(data: registerFormDto) {
+    const response = await fetchUser(data)
       .then((response) => {
-        setNoficationMessage("user added " + response.name);
+        setNoficationMessage(
+          `User added: ${response.name} ${response.surname}`
+        );
       })
       .catch((reason) => {
-        setNoficationMessage(reason);
+        setNoficationMessage("Errore durante l'aggiunta dell'utente." + reason);
       });
   }
 
   return (
-    <>
-      {notificationMessage}
+    <FormWrapper>
+      {notificationMessage && <p>{notificationMessage}</p>}
       <form onSubmit={handleSubmit(addUser)}>
-        <div style={{ marginTop: "10px" }}>
-          <label htmlFor="name">Nome</label>
-          <input
+        <InputGroup>
+          <Label htmlFor="name">Nome</Label>
+          <Input
             id="name"
-            {...register("name", { required: "Campo obbligatorio" })}
+            {...register("name", {
+              required: "Campo obbligatorio",
+              minLength: {
+                value: 3,
+                message: "Il nome deve contenere almeno 3 caratteri.",
+              },
+            })}
             placeholder="Inserisci nome"
           />
+          {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
+        </InputGroup>
 
-          {errors.name && <span>{errors.name.message as string}</span>}
-        </div>
-
-        <div style={{ marginTop: "10px" }}>
-          <label htmlFor="surname">Cognome</label>
-          <input
+        <InputGroup>
+          <Label htmlFor="surname">Cognome</Label>
+          <Input
             id="surname"
-            {...register("surname", { required: "Campo obbligatorio" })}
+            {...register("surname", {
+              required: "Campo obbligatorio",
+              minLength: {
+                value: 3,
+                message: "Il cognome deve contenere almeno 3 caratteri.",
+              },
+            })}
             placeholder="Inserisci cognome"
           />
-          {errors.surname && <span>{errors.surname.message as string}</span>}
-        </div>
+          {errors.surname && (
+            <ErrorMessage>{errors.surname.message}</ErrorMessage>
+          )}
+        </InputGroup>
 
-        <div style={{ marginTop: "10px" }}>
-          <label htmlFor="password">Password</label>
-          <input
+        <InputGroup>
+          <Label htmlFor="password">Password</Label>
+          <Input
             type="password"
             id="password"
             {...register("password", {
               required: "Campo obbligatorio",
               pattern: {
                 value: constants.PASSWORD_REGEX,
-                message: "Password non corretta",
+                message:
+                  "La password deve contenere almeno 8 caratteri, una lettera maiuscola, una minuscola, un numero e un carattere speciale.",
               },
             })}
             placeholder="Inserisci password"
           />
+          {errors.password && (
+            <ErrorMessage>{errors.password.message}</ErrorMessage>
+          )}
+        </InputGroup>
 
-          {errors.password && <span>{errors.password.message as string}</span>}
-        </div>
-
-        <div style={{ marginTop: "20px", textAlign: "center" }}>
-          <button
-            type="submit"
-            style={{ width: "80%", padding: "10px", background: "white" }}
-          >
-            Invia
-          </button>
-        </div>
+        <Button type="submit" disabled={Object.keys(errors).length > 0}>
+          {"invia"}
+        </Button>
       </form>
-    </>
+    </FormWrapper>
   );
 }
 

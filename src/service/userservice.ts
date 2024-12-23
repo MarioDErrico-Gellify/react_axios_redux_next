@@ -1,10 +1,7 @@
 import axios from "axios";
+import { registerFormDto } from "./userTypes";
 
-export async function fetchUser(params: {
-  name: string;
-  surname: string;
-  age: number;
-}) {
+export async function fetchUser(params: registerFormDto) {
   try {
     const response = await axios.post(
       //JSONPlaceholder, RESTFULL API SIMULATED WIHT FREE SERVICE.
