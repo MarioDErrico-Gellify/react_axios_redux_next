@@ -1,10 +1,11 @@
-import NavBar from "@/components/navBar";
-import { MantineProvider } from "@mantine/core";
-import "@mantine/core/styles.css";
 export default function App() {
-  return (
-   
-      <p>my next app</p>
-  
-  );
+  const varrayModTwo: number | string | any[] = [];
+  const numbers = [1, 2, 3, 4, 5, 6];
+  numbers.some((value: number) => {
+    if (value % 2 === 0) {
+      /*TODO add a new array*/
+      varrayModTwo.push("mod 2 value" + value);
+    }
+  });
+  return <p>{varrayModTwo}</p>;
 }

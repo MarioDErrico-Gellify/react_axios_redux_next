@@ -37,13 +37,6 @@ function NavBar() {
           />
         }
       />
-      <NavLink
-        component={Link}
-        href="/disabled"
-        label="Disabled"
-        leftSection={<IconCircleOff size="1rem" stroke={1.5} />}
-        disabled
-      />
     </div>
   );
 }
