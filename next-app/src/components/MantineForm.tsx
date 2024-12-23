@@ -17,7 +17,7 @@ function MantineForm() {
   });
 
   function handleSubmit(params: MantineFormDTO) {
-    window.alert(params.age);
+    window.alert(params.email);
     /*TODO ADD CALL API*/
   }
 
