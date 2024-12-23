@@ -1,16 +1,19 @@
 import { NavLink } from "@mantine/core";
 import {
-  IconHome2,
   IconGauge,
   IconChevronRight,
   IconCircleOff,
+  IconHome2,
 } from "@tabler/icons-react";
 import Link from "next/link";
 
 function NavBar() {
   return (
-    <>
+    <div
+     
+    >
       <NavLink
+        style={{}}
         component={Link}
         href="/"
         label="HomePage"
@@ -19,7 +22,7 @@ function NavBar() {
       <NavLink
         component={Link}
         href="dashboard"
-        label="With right section"
+        label="dashboard"
         leftSection={<IconGauge size="1rem" stroke={1.5} />}
         rightSection={
           <IconChevronRight
@@ -36,7 +39,7 @@ function NavBar() {
         leftSection={<IconCircleOff size="1rem" stroke={1.5} />}
         disabled
       />
-    </>
+    </div>
   );
 }
 
