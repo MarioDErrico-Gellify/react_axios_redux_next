@@ -21,15 +21,16 @@ function RegisterForm() {
   } = useForm<registerFormDto>();
 
   async function addUser(data: registerFormDto) {
-    const response = await registerUser(data)
-      .then((response) => {
-        setNoficationMessage(
-          `User added: ${response.name} ${response.surname}`
-        );
-      })
-      .catch((reason) => {
-        setNoficationMessage("Errore durante l'aggiunta dell'utente." + reason);
-      });
+    try {
+      const response = await registerUser(data);
+      setNoficationMessage(`User added: ${response.name} ${response.surname}`);
+      console.log("🚀 Utente aggiunto con successo!");
+    } catch (error) {
+      setNoficationMessage(`Errore durante l'aggiunta dell'utente: ${error}`);
+      console.error("❌ Errore:", error);
+    } finally {
+      console.log("🛠️ Operazione conclusa.");
+    }
   }
 
   return (

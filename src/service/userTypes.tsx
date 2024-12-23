@@ -5,7 +5,6 @@ export type registerFormDto = {
 };
 
 export type retrieveFakeDataDto = {
-  [x: string]: any;
   userId: number;
   id: number;
   title: string;
