@@ -25,7 +25,7 @@ export async function retriveUser() {
       "https://jsonplaceholder.typicode.com/todos/1"
     );
     console.log("Dati ricevuti dalla chiamata API:", response.data);
-    return response.data;
+    return response.data as retrieveFakeDataDto;
   } catch (error) {
     console.error("Errore durante la chiamata API:", error);
     throw error;
