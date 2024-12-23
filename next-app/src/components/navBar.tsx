@@ -9,14 +9,19 @@ import Link from "next/link";
 
 function NavBar() {
   return (
-    <div
-     
-    >
+    <div>
       <NavLink
         style={{}}
         component={Link}
         href="/"
         label="HomePage"
+        leftSection={<IconHome2 size="1rem" stroke={1.5} />}
+      />
+      <NavLink
+        style={{}}
+        component={Link}
+        href="FormExampleMantine"
+        label="GoTo-FormExampleMantine"
         leftSection={<IconHome2 size="1rem" stroke={1.5} />}
       />
       <NavLink

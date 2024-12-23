@@ -15,11 +15,13 @@ export default function pageTree() {
       })
       .finally(() => {
         arrayFake.map((val) => {
-          setTitle(val.title + val.id + val.userId + " this is a api response");
+          setTitle(
+            val.title + val.id + val.userId + "" + " this is a api response"
+          );
         });
       })
       .catch((reason) => {
-        console.log("💔" + reason);
+        console.error("💔" + reason);
       });
   }
 
