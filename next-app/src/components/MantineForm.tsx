@@ -1,6 +1,6 @@
 import { useForm } from "@mantine/form";
 import { NumberInput, TextInput, Button } from "@mantine/core";
-import { MantineFormDTO } from "@/service/mantineFormDto";
+import { MantineFormDTO } from "@/service/userFormTypes";
 import { registerUser } from "@/service/userFormService";
 import { IconBrandWindows } from "@tabler/icons-react";
 

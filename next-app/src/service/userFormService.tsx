@@ -1,5 +1,5 @@
 import axios from "axios";
-import { MantineFormDTO } from "./mantineFormDto";
+import { MantineFormDTO, retrieveFakeDataDto } from "./userFormTypes";
 
 const API_URL = process.env.REACT_APP_API_URL!;
 
