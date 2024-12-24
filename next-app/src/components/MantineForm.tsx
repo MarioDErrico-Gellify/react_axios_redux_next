@@ -1,6 +1,8 @@
 import { useForm } from "@mantine/form";
 import { NumberInput, TextInput, Button } from "@mantine/core";
 import { MantineFormDTO } from "@/service/mantineFormDto";
+import { registerUser } from "@/service/userFormService";
+import { IconBrandWindows } from "@tabler/icons-react";
 
 type genericPropsMantine = {
   labels: string[];
@@ -28,12 +30,14 @@ function MantineForm({
     },
   });
 
-  function handleSubmit(values: MantineFormDTO) {
-    window.alert(
-      "Form submitted with values:" + values.age + values.email + values.name
-    );
-
-    form.reset();
+  async function handleSubmit(values: MantineFormDTO) {
+    await registerUser(values)
+      .then((response) => {
+        window.alert(values.age);
+      })
+      .finally(() => {
+        form.reset();
+      });
   }
 
   return (
