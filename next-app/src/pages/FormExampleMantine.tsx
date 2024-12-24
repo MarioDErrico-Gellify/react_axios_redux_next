@@ -1,15 +1,13 @@
 import MantineForm from "@/components/MantineForm";
+import { labelsForFormOne, placeholdersForFormOne } from "@/constants/costants";
 import { Container } from "@mantine/core";
 
 export default function FormExampleMantine() {
-  const labels = ["Name", "Email", "Age"];
-  const placeholders = ["Insert name", "Insert email", "Insert age"];
-
   return (
     <Container>
       <MantineForm
-        labels={labels}
-        placeholders={placeholders}
+        labels={labelsForFormOne}
+        placeholders={placeholdersForFormOne}
         buttonLabel="Submit"
       />
     </Container>
