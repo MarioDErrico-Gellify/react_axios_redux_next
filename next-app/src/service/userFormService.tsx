@@ -16,10 +16,7 @@ export async function registerUser(params: MantineFormDTO) {
 
 export async function retriveUser() {
   try {
-    const response = await axios.get(
-      // TODO, added env path
-      "https://jsonplaceholder.typicode.com/todos/1"
-    );
+    const response = await axios.get(`${API_URL}/todos/1`);
     console.log("Dati ricevuti dalla chiamata API:", response.data);
     return response.data as retrieveFakeDataDto;
   } catch (error) {
