@@ -1,3 +1,4 @@
+import { Paths } from "@/constants/costants";
 import { NavLink } from "@mantine/core";
 import {
   IconGauge,
@@ -13,20 +14,20 @@ function NavBar() {
       <NavLink
         style={{}}
         component={Link}
-        href="/"
+        href={Paths.homePage}
         label="HomePage"
         leftSection={<IconHome2 size="1rem" stroke={1.5} />}
       />
       <NavLink
         style={{}}
         component={Link}
-        href="FormExampleMantine"
+        href={Paths.formMantine}
         label="GoTo-FormExampleMantine"
         leftSection={<IconHome2 size="1rem" stroke={1.5} />}
       />
       <NavLink
         component={Link}
-        href="dashboard"
+        href={Paths.dashboard}
         label="dashboard"
         leftSection={<IconGauge size="1rem" stroke={1.5} />}
         rightSection={

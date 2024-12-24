@@ -4,3 +4,8 @@ export const placeholdersForFormOne = [
   "Insert email",
   "Insert age",
 ];
+export enum Paths {
+  homePage = "/",
+  dashboard = "dashboard",
+  formMantine = "FormExampleMantine",
+}
