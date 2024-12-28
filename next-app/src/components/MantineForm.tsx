@@ -61,37 +61,26 @@ function MantineForm<T extends MantineFormDTO>({
   
 //-----------------------------
  
-  return (
-    <Container>
-      {loading && <Loader color="blue" />}
-      <form onSubmit={form.onSubmit(handleSubmit)}>
-        {labels.map((label, _value) => {
-          const fieldName = label.toLowerCase();
-          return (
-            <div key={_value} style={{ marginBottom: "1rem" }}>
-              <TextInput
-                label={label}
-                placeholder={placeholders[_value]}
-                {...form.getInputProps(fieldName)}
-              />
-            </div>
-          );
-        })}
-        <Button type="submit" mt="lg" disabled={disableButton()}>
-          {buttonLabel}
-        </Button>
-      </form>
+return (
+  <Container>
+    {loading && <Loader color="blue" />}
+    <form onSubmit={form.onSubmit(handleSubmit)}>
+      {labels.map((label, _value) => (
+        <div key={_value} style={{ marginBottom: "1rem" }}>
+          <TextInput
+            label={label}
+            placeholder={placeholders[_value]}
+            {...form.getInputProps(label.toLowerCase())}
+          />
+        </div>
+      ))}
+      <Button type="submit" mt="lg" disabled={disableButton()}>
+        {buttonLabel}
+      </Button>
+    </form>
+  </Container>
+);
 
-      
-      <CardUser 
-        name={userData?.name!} 
-        email={userData?.email!} 
-        age={userData?.age!} 
-        onClose={()=>{setModalOpened(false)}} 
-        opened={modalOpened} 
-      />
-    </Container>
-  );
 }
 
 export default MantineForm;
