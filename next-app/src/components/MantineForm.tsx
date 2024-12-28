@@ -2,7 +2,7 @@ import { useForm } from "@mantine/form";
 import { NumberInput, TextInput, Button, Container, Loader } from "@mantine/core";
 import { MantineFormDTO } from "@/service/userFormTypes";
 import { registerUser } from "@/service/userFormService";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CardUser from "./cardUser";
 
 type genericPropsMantine = {
@@ -22,7 +22,7 @@ function MantineForm({
   const [loading, setLoading] = useState(false);
   
 
-  const [userData, setUserData] = useState<{ name: string, email: string, age: number } | null>(null);
+  const [userData, setUserData] = useState<MantineFormDTO | null>(null);
 
   const form = useForm({
     mode: mode || "uncontrolled",
@@ -57,21 +57,17 @@ function MantineForm({
   }
 
  
-  const handleClose = () => {
-    setModalOpened(false); 
-  };
-
   return (
     <Container>
       {loading && <Loader color="blue" />}
       <form onSubmit={form.onSubmit(handleSubmit)}>
-        {labels.map((label, _) => {
+        {labels.map((label, _value) => {
           const fieldName = label.toLowerCase();
           return (
-            <div key={_} style={{ marginBottom: "1rem" }}>
+            <div key={_value} style={{ marginBottom: "1rem" }}>
               <TextInput
                 label={label}
-                placeholder={placeholders[_]}
+                placeholder={placeholders[_value]}
                 {...form.getInputProps(fieldName)}
               />
             </div>
@@ -87,7 +83,7 @@ function MantineForm({
         name={userData?.name!} 
         email={userData?.email!} 
         age={userData?.age!} 
-        onClose={handleClose} 
+        onClose={()=>{setModalOpened(false)}} 
         opened={modalOpened} 
       />
     </Container>
