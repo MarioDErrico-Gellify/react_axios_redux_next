@@ -50,7 +50,7 @@ function MantineForm({
       setModalOpened(true);
       form.reset();
     } catch (error) {
-      console.error("💔 Error during registration:", error);
+      console.error("💔Error during registration:", error);
     } finally {
       setLoading(false); 
     }
