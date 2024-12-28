@@ -10,6 +10,10 @@ export async function registerUser(params: MantineFormDTO) {
         "Content-Type": "application/json",
       },
     };
+
+    // Simulazione di un ritardo (4 secondi)
+    await new Promise((resolve) => setTimeout(resolve, 4000));
+
     const response = await axios.post(API_URL!, params, config);
     console.log("Dati ricevuti dalla chiamata API:", response.data);
     return response.data;
@@ -18,6 +22,7 @@ export async function registerUser(params: MantineFormDTO) {
     throw error;
   }
 }
+
 
 export async function retriveUser() {
   try {

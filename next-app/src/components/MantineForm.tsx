@@ -1,8 +1,9 @@
 import { useForm } from "@mantine/form";
-import { NumberInput, TextInput, Button } from "@mantine/core";
+import { NumberInput, TextInput, Button, Container, Loader } from "@mantine/core";
 import { MantineFormDTO } from "@/service/userFormTypes";
 import { registerUser } from "@/service/userFormService";
-import { IconBrandWindows } from "@tabler/icons-react";
+import { useState } from "react";
+import CardUser from "./cardUser";
 
 type genericPropsMantine = {
   labels: string[];
@@ -17,6 +18,12 @@ function MantineForm({
   buttonLabel,
   mode,
 }: genericPropsMantine) {
+  const [modalOpened, setModalOpened] = useState(false);
+  const [loading, setLoading] = useState(false);
+  
+
+  const [userData, setUserData] = useState<{ name: string, email: string, age: number } | null>(null);
+
   const form = useForm({
     mode: mode || "uncontrolled",
     initialValues: { name: "", email: "", age: 18 },
@@ -30,35 +37,63 @@ function MantineForm({
     },
   });
 
+  
   async function handleSubmit(values: MantineFormDTO) {
-    await registerUser(values)
-      .then((response) => {
-        window.alert(values.age);
-      })
-      .finally(() => {
-        form.reset();
+    setLoading(true); 
+    try { 
+      const response = await registerUser(values);
+      setUserData({
+        name: response.name || values.name, 
+        email: response.email || values.email,
+        age: response.age || values.age,
       });
+      setModalOpened(true);
+      form.reset();
+    } catch (error) {
+      console.error("💔 Error during registration:", error);
+    } finally {
+      setLoading(false); 
+    }
   }
 
+ 
+  const handleClose = () => {
+    setModalOpened(false); 
+  };
+
   return (
-    <form onSubmit={form.onSubmit(handleSubmit)}>
-      {labels.map((label, _) => {
-        const fieldName = label.toLowerCase();
-        return (
-          <div key={_} style={{ marginBottom: "1rem" }}>
-            <TextInput
-              label={label}
-              placeholder={placeholders[_]}
-              {...form.getInputProps(fieldName)}
-            />
-          </div>
-        );
-      })}
-      <Button type="submit" mt="sm">
-        {buttonLabel}
-      </Button>
-    </form>
+    <Container>
+      {loading && <Loader color="blue" />}
+      <form onSubmit={form.onSubmit(handleSubmit)}>
+        {labels.map((label, _) => {
+          const fieldName = label.toLowerCase();
+          return (
+            <div key={_} style={{ marginBottom: "1rem" }}>
+              <TextInput
+                label={label}
+                placeholder={placeholders[_]}
+                {...form.getInputProps(fieldName)}
+              />
+            </div>
+          );
+        })}
+        <Button type="submit" mt="sm">
+          {buttonLabel}
+        </Button>
+      </form>
+
+      
+      <CardUser 
+        name={userData?.name!} 
+        email={userData?.email!} 
+        age={userData?.age!} 
+        onClose={handleClose} 
+        opened={modalOpened} 
+      />
+    </Container>
   );
 }
 
 export default MantineForm;
+
+
