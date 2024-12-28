@@ -1,37 +1,40 @@
 import { useForm } from "@mantine/form";
-import { NumberInput, TextInput, Button, Container, Loader } from "@mantine/core";
+import { TextInput, Button, Container, Loader } from "@mantine/core";
 import { MantineFormDTO } from "@/service/userFormTypes";
 import { registerUser } from "@/service/userFormService";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CardUser from "./cardUser";
+import { constants } from "@/constants/costants";
 
-type genericPropsMantine = {
+//-----------------------------
+
+type genericPropsMantine<T> = {
   labels: string[];
   placeholders: string[];
   buttonLabel: string;
   mode?: "uncontrolled" | "controlled";
 };
 
-function MantineForm({
+//-----------------------------
+
+function MantineForm<T extends MantineFormDTO>({
   labels,
   placeholders,
   buttonLabel,
   mode,
-}: genericPropsMantine) {
+}: genericPropsMantine<T>) {
   const [modalOpened, setModalOpened] = useState(false);
   const [loading, setLoading] = useState(false);
-  
-
-  const [userData, setUserData] = useState<MantineFormDTO | null>(null);
+  const [userData, setUserData] = useState<MantineFormDTO>();
 
   const form = useForm({
-    mode: mode || "uncontrolled",
+    mode: mode,
     initialValues: { name: "", email: "", age: 18 },
     validate: {
       name: (value: string) =>
         value.length < 2 ? "Name must have at least 2 letters" : null,
-      email: (value: string) =>
-        /^\S+@\S+$/.test(value) ? null : "Invalid email",
+      email: (value : string) =>
+      constants.EMAIL_REGEX.test(value) ? null : "Invalid email",
       age: (value: number) =>
         value < 18 ? "You must be at least 18 to register" : null,
     },
@@ -42,11 +45,7 @@ function MantineForm({
     setLoading(true); 
     try { 
       const response = await registerUser(values);
-      setUserData({
-        name: response.name || values.name, 
-        email: response.email || values.email,
-        age: response.age || values.age,
-      });
+      setUserData(response);
       setModalOpened(true);
       form.reset();
     } catch (error) {
@@ -56,6 +55,11 @@ function MantineForm({
     }
   }
 
+  function disableButton(): boolean {
+    return !form.values.name || !form.values.email || !form.values.age;
+  }
+  
+//-----------------------------
  
   return (
     <Container>
@@ -73,7 +77,7 @@ function MantineForm({
             </div>
           );
         })}
-        <Button type="submit" mt="sm">
+        <Button type="submit" mt="lg" disabled={disableButton()}>
           {buttonLabel}
         </Button>
       </form>

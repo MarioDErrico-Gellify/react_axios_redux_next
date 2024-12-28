@@ -1,11 +1,13 @@
 import MantineForm from "@/components/MantineForm";
 import { labelsForFormOne, placeholdersForFormOne } from "@/constants/costants";
+import { MantineFormDTO } from "@/service/userFormTypes";
 import { Container } from "@mantine/core";
 
 export default function FormExampleMantine() {
   return (
     <Container>
-      <MantineForm
+      <MantineForm<MantineFormDTO>
+        mode={'controlled'}
         labels={labelsForFormOne}
         placeholders={placeholdersForFormOne}
         buttonLabel="Submit"

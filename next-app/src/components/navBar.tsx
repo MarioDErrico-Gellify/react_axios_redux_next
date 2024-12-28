@@ -3,7 +3,6 @@ import { NavLink } from "@mantine/core";
 import {
   IconGauge,
   IconChevronRight,
-  IconCircleOff,
   IconHome2,
 } from "@tabler/icons-react";
 import Link from "next/link";

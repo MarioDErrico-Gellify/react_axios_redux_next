@@ -1,5 +1,5 @@
-import { Button, Modal } from "@mantine/core";
-import { useState } from "react";
+import { Modal } from "@mantine/core";
+
 
 type CardProps = {
   name: string;
@@ -14,7 +14,7 @@ function CardUser({ name, email, age, onClose, opened }: CardProps) {
     <Modal 
       opened={opened} 
       onClose={onClose} 
-      title="Register"
+      title="Added User"
     >
       <p>{name}</p>
       <p>{email}</p>
