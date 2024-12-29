@@ -3,7 +3,8 @@ import { TextInput, Button, Container, Loader } from "@mantine/core";
 import { MantineFormDTO } from "@/service/userFormTypes";
 import { registerUser } from "@/service/userFormService";
 import { useState } from "react";
-import { consoleLog, constants } from "@/constants/costants";
+import { consoleLog } from "@/constants/costants";
+import { validateForm } from "@/utils/validateFunction/validateFormOne";
 
 //-----------------------------
 
@@ -29,14 +30,7 @@ function MantineForm<T extends MantineFormDTO>({
   const form = useForm({
     mode: mode,
     initialValues: { name: "", email: "", age: 18 },
-    validate: {
-      name: (value: string) =>
-        value.length < 2 ? "Name must have at least 2 letters" : null,
-      email: (value : string) =>
-      constants.EMAIL_REGEX.test(value) ? null : "Invalid email",
-      age: (value: number) =>
-        value < 18 ? "You must be at least 18 to register" : null,
-    },
+    validate: validateForm
   });
 
   
