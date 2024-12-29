@@ -3,7 +3,7 @@ import { TextInput, Button, Container, Loader } from "@mantine/core";
 import { MantineFormDTO } from "@/service/userFormTypes";
 import { registerUser } from "@/service/userFormService";
 import { useState } from "react";
-import { constants } from "@/constants/costants";
+import { consoleLog, constants } from "@/constants/costants";
 
 //-----------------------------
 
@@ -22,7 +22,7 @@ function MantineForm<T extends MantineFormDTO>({
   buttonLabel,
   mode,
 }: genericPropsMantine<T>) {
-  const [modalOpened, setModalOpened] = useState(false);
+  const [_, setModalOpened] = useState(false);
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState<MantineFormDTO>();
 
@@ -44,13 +44,14 @@ function MantineForm<T extends MantineFormDTO>({
     setLoading(true); 
     try { 
       const response = await registerUser(values);
-      setUserData(response);
+      setUserData({name : response.name , email : response.email , age : response.age});
       setModalOpened(true);
       form.reset();
     } catch (error) {
-      console.error("💔Error during registration:", error);
+      console.error(consoleLog.error, error);
     } finally {
       setLoading(false); 
+      console.info(userData)
     }
   }
 

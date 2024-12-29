@@ -19,3 +19,25 @@ export const constants = {
   DEFAULT_LANGUAGE: "it",
   SUPPORTEDLANGUAGES: ["it", "en"] as const,
 };
+
+export const consoleLog ={
+  error : "💔Error during registration:"
+  /*TODO add more log*/
+}
+
+export enum HttpStatus {
+  OK = 200,
+  Created = 201,
+  Accepted = 202,
+  NonAuthoritativeInformation = 203,
+  NoContent = 204,
+  ResetContent = 205,
+  PartialContent = 206,
+  MultiStatus = 207,
+  AlreadyReported = 208,
+  IMUsed = 226,
+  Bad_Request = 400
+}
+
+
+
