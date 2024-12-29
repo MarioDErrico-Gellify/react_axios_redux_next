@@ -5,21 +5,16 @@ import ns2 from "./en.json";
 //TODO ADD A TRANSLATION IN LOCAL STORAGE.
 export const defaultNS = "ns1";
 
-i18next
-  .use(initReactI18next)
-  .init({
-    lng: "it",
-    debug: true,
-    resources: {
-      it: {
-        ns1,
-      },
-      en: {
-        ns2,
-      },
+i18next.use(initReactI18next).init({
+  lng: "it",
+  debug: true,
+  resources: {
+    it: {
+      ns1,
     },
-    defaultNS,
-  })
-  .then((r) => {});
-
-export default i18next;
+    en: {
+      ns1: ns2,
+    },
+  },
+  defaultNS: "ns1",
+});

@@ -1,9 +1,10 @@
-import { MantineProvider } from "@mantine/core";
+import NavBar from "@/components/navBar/navBar";
+import {MantineProvider} from "@mantine/core";
 import "@mantine/core/styles.css";
-import NavBar from "@/components/navBar";
-import { AppProps } from "next/app";
 
-export default function App({ Component, pageProps }: AppProps) {
+import {AppProps} from "next/app";
+
+export default function App({Component, pageProps}: AppProps) {
   return (
     <MantineProvider>
       <NavBar />
