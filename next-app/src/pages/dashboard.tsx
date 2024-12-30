@@ -1,6 +1,6 @@
 import CardDashboard from "@/components/cardDashboard";
-import {useAppSelector} from "@/hook/hooks";
-import {Container} from "@mantine/core";
+import { useAppSelector } from "@/hook/hooks";
+import { Container } from "@mantine/core";
 
 export default function Dashboard() {
   const userState = useAppSelector((state) => state.auth);
