@@ -1,3 +1,5 @@
+import { HttpStatus } from "@/constants/costants";
+
 export type MantineFormDTO = {
     name: string;
     email: string;
@@ -18,7 +20,7 @@ export type MantineFormDTO = {
     user?: any;
     token?: any;
     action: string;
-    status: 'loading' | 'success' | 'fail' | 'idle';
+    status: HttpStatus;
     error: string;
   }
   

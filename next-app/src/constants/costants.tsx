@@ -20,10 +20,10 @@ export const constants = {
   SUPPORTEDLANGUAGES: ["it", "en"] as const,
 };
 
-export const consoleLog ={
-  error : "💔Error during registration:"
+export const consoleLog = {
+  error: "💔Error during registration:",
   /*TODO add more log*/
-}
+};
 
 export enum HttpStatus {
   OK = 200,
@@ -36,8 +36,5 @@ export enum HttpStatus {
   MultiStatus = 207,
   AlreadyReported = 208,
   IMUsed = 226,
-  Bad_Request = 400
+  Bad_Request = 400,
 }
-
-
-

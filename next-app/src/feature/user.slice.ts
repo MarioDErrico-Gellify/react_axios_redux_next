@@ -7,9 +7,9 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const initialState: UserState = {
   name: "",
-  age: 0,
+  age: null,
   email: "",
-  status: 'idle',
+  status: HttpStatus.Accepted,
   action: '',
   error: '',
 };
@@ -43,12 +43,12 @@ const authSlice = createSlice({
     builder
       .addCase(registerUser.pending, (state: UserState) => {
         state.action = USER_START;
-        state.status = 'loading';
+        state.status = HttpStatus.Created;
         state.error = '';
       })
       .addCase(registerUser.fulfilled, (state: UserState, action) => {
         state.action = USER_SUCCESS;
-        state.status = 'success';
+        state.status = HttpStatus.OK,
         state.error = '';
         state.isAuthenticated = true;
       
@@ -60,7 +60,7 @@ const authSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state: UserState, action: any) => {
         state.action = USER_ERROR;
-        state.status = 'fail';
+        state.status = HttpStatus.Bad_Request;
         state.error = action.error?.response?.data?.message || 'An unknown error occurred';
       });
   },

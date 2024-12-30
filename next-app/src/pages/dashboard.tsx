@@ -9,10 +9,16 @@ export default function Dashboard() {
     <>
       <Container>
         <CardDashboard></CardDashboard>
-        <p>{userState.age}</p>
-        <p>{userState.email}</p>
-        <p>{userState.name}</p>
-        <p>{userState.isAuthenticated}</p>
+        {userState ? (
+          <>
+            <p>{userState.age}</p>
+            <p>{userState.email}</p>
+            <p>{userState.name}</p>
+            <p>{userState.isAuthenticated}</p>
+          </>
+        ) : (
+          <p>{"please add user"}</p>
+        )}
       </Container>
     </>
   );
