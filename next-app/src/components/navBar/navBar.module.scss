@@ -1,15 +1,16 @@
 .navbar {
-     display: flex;
-      flex-direction: row;
-      width: 100%;
-      align-items: center;
-      background-color: rgb(73, 117, 194);
-      border-bottom: 1px solid;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  background-color: rgb(73, 117, 194);
+  border-bottom: 1px solid;
 
 }
-.navLink{
-      align-items: start !important;
-      display: flex;
-      flex-direction: row;
+
+.navLink {
+  align-items: start !important;
+  display: flex;
+  flex-direction: row;
 }
   

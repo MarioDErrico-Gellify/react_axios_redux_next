@@ -1,14 +1,13 @@
-import {useEffect, useState} from "react";
-import {useForm} from "@mantine/form";
-import {TextInput, Button, Container} from "@mantine/core";
-import {validateForm} from "@/utils/validateFunction/validateFormOne";
+import { useEffect, useState } from "react";
+import { useForm } from "@mantine/form";
+import { TextInput, Button, Container } from "@mantine/core";
+import { validateForm } from "@/utils/validateFunction/validateFormOne";
 import ModalUser from "./modalUser";
 import NotificationInfo from "./notification/Notification";
-import {useAppDispatch} from "@/hook/hooks";
-import {simulateRegisterUser} from "@/feature/user.slice";
-import {consoleLog} from "@/constants/costants";
-import {UserFormDTO} from "@/feature/user.types";
-
+import { useAppDispatch } from "@/hook/hooks";
+import { simulateRegisterUser } from "@/feature/user.slice";
+import { consoleLog } from "@/constants/costants";
+import { UserFormDTO } from "@/feature/user.types";
 
 type genericPropsMantine = {
   labels: string[];
@@ -34,8 +33,8 @@ function MantineForm({
   }, []);
 
   const form = useForm({
-    mode: mode,
-    initialValues: {name: "", email: "", age: undefined},
+    mode: mode || "controlled",
+    initialValues: { name: "", email: "", age: 0 },
     validate: validateForm,
   });
 
@@ -46,20 +45,22 @@ function MantineForm({
         email: param.email,
         name: param.name,
         age: param.age,
-      })
+      }),
     )
       .unwrap()
-      .then((value : UserFormDTO) => {
+      .then((value: UserFormDTO) => {
         setModalOpened(true);
-        setLoading(false);
-        setUserData({name: value.name, age: value.age, email: value.email});
+        setUserData({ name: value.name, age: value.age, email: value.email });
         form.reset();
         setNotification(true);
       })
-      .catch((reason : string) => {
+      .catch((reason: string) => {
         setLoading(false);
         console.log(reason + consoleLog.error);
         form.reset();
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }
 
@@ -71,7 +72,7 @@ function MantineForm({
     <Container>
       <form onSubmit={form.onSubmit(handleSubmit)}>
         {labels.map((label, _value) => (
-          <div key={_value} style={{marginBottom: "1rem"}}>
+          <div key={_value} style={{ marginBottom: "1rem" }}>
             <TextInput
               label={label}
               placeholder={placeholders[_value]}
@@ -89,8 +90,8 @@ function MantineForm({
         </Button>
       </form>
       <ModalUser
-        name={userData?.name || ''}
-        email={userData?.email || ''}
+        name={userData?.name || ""}
+        email={userData?.email || ""}
         age={userData?.age || 0}
         onClose={() => setModalOpened(false)}
         opened={openModal}

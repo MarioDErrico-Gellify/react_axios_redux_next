@@ -4,6 +4,7 @@ export const placeholdersForFormOne = [
   "Insert email",
   "Insert age",
 ];
+
 export enum Paths {
   homePage = "/",
   dashboard = "dashboard",
@@ -17,7 +18,7 @@ export const constants = {
   EMAIL_REGEX: /^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+)+[.][A-Za-z]{2,}$/,
   DEFAULT_COUNTRY_CODE: "IT",
   DEFAULT_LANGUAGE: "it",
-  SUPPORTEDLANGUAGES: ["it", "en"] as const,
+  SUPPORTED_LANGUAGES: ["it", "en"] as const,
 };
 
 export const consoleLog = {

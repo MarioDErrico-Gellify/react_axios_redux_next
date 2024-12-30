@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import {Card, Text, List, Container, TextInput, Button} from "@mantine/core";
-import {sortNumbers} from "@/utils/sortNumber";
+import React, { useState } from "react";
+import { Card, Text, List, Container, TextInput, Button } from "@mantine/core";
+import { sortNumbers } from "@/utils/sortNumber";
 
 export default function App() {
   const [inputValue, setInputValue] = useState("");
@@ -9,7 +9,7 @@ export default function App() {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setInputValue(
-      value.length > 0 && value[value.length - 1] !== "," ? value + "," : value
+      value.length > 0 && value[value.length - 1] !== "," ? value + "," : value,
     );
   };
 
@@ -21,7 +21,7 @@ export default function App() {
 
   return (
     <Container>
-      <Card shadow="sm" padding="lg" style={{width: 300, margin: "auto"}}>
+      <Card shadow="sm" padding="lg" style={{ width: 300, margin: "auto" }}>
         <Text size="xl">Inserisci i Numeri</Text>
         <TextInput
           label="Numeri separati da virgola"
