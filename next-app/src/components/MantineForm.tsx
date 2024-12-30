@@ -7,6 +7,7 @@ import ModalUser from "./modalUser";
 import NotificationInfo from "./notification/Notification";
 import {useAppDispatch} from "@/hook/hooks";
 import {registerUser} from "@/feature/user.slice";
+import {consoleLog} from "@/constants/costants";
 
 type genericPropsMantine<T> = {
   labels: string[];
@@ -52,7 +53,7 @@ function MantineForm<T extends MantineFormDTO>({
       })
       .catch((reason) => {
         setLoading(false);
-        console.log(reason);
+        console.log(reason + consoleLog.error);
         form.reset();
       });
   }
