@@ -1,8 +1,8 @@
-import {constants} from "@/constants/costants";
-import {UserFormDTO} from "@/feature/user.types";
+import { constants } from "@/constants/costants";
+import { UserFormDTO } from "@/feature/user.types";
 
 export const validateForm = (values: UserFormDTO) => {
-  const errors: {[key: string]: string | null} = {};
+  const errors: { [key: string]: string | null } = {};
 
   errors.name =
     values.name.length < 2 ? "Name must have at least 2 letters" : null;
