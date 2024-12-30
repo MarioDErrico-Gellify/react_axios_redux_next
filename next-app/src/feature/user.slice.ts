@@ -5,13 +5,13 @@ import { HttpStatus } from '@/constants/costants';
 import { USER_ERROR, USER_START, USER_SUCCESS } from './user.action';
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-//------------------------
+//-------------------------
 
 const initialState = initialStateUserForm;
 
 export const simulateRegisterUser = createAsyncThunk(
   USER_START,
-  async (body: UserFormDTO, _rejectedWithValue) => {
+  async (body: UserFormDTO) => {
     try {
       const config = {
         headers: {
@@ -33,16 +33,16 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {}, 
-  extraReducers(builder) {
+  extraReducers(builder : any) {
     builder
       .addCase(simulateRegisterUser.pending, (state: UserState) => {
         state.action = USER_START;
         state.status = HttpStatus.Created;
         state.error = '';
       })
-      .addCase(simulateRegisterUser.fulfilled, (state: UserState, action) => {
+      .addCase(simulateRegisterUser.fulfilled, (state: UserState, action : any) => {
         state.action = USER_SUCCESS;
-        state.status = HttpStatus.OK,
+        state.status = HttpStatus.OK;
         state.error = '';
         state.isAuthenticated = 'true';
         if (action.payload) {
@@ -52,7 +52,7 @@ const authSlice = createSlice({
           localStorage.setItem('ADDED_NEW_USER', state.isAuthenticated);
         }
       })
-      .addCase(simulateRegisterUser.rejected, (state: UserState, action : any) => {
+      .addCase(simulateRegisterUser.rejected, (state: UserState, action : any ) => {
         state.action = USER_ERROR;
         state.status = HttpStatus.Bad_Request;
         state.error = action.error?.response?.data?.message || 'An unknown error occurred';

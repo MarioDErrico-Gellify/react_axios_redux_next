@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useForm} from "@mantine/form";
-import {TextInput, Button, Container, Loader} from "@mantine/core";
+import {TextInput, Button, Container} from "@mantine/core";
 import {validateForm} from "@/utils/validateFunction/validateFormOne";
 import ModalUser from "./modalUser";
 import NotificationInfo from "./notification/Notification";
@@ -9,19 +9,20 @@ import {simulateRegisterUser} from "@/feature/user.slice";
 import {consoleLog} from "@/constants/costants";
 import {UserFormDTO} from "@/feature/user.types";
 
-type genericPropsMantine<T> = {
+
+type genericPropsMantine = {
   labels: string[];
   placeholders: string[];
   buttonLabel: string;
   mode?: "uncontrolled" | "controlled";
 };
 
-function MantineForm<T extends UserFormDTO>({
+function MantineForm({
   labels,
   placeholders,
   buttonLabel,
   mode,
-}: genericPropsMantine<T>) {
+}: genericPropsMantine) {
   const dispatch = useAppDispatch();
   const [openModal, setModalOpened] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -30,7 +31,7 @@ function MantineForm<T extends UserFormDTO>({
 
   useEffect(() => {
     console.log(localStorage.getItem("ADDED_NEW_USER"));
-  }, [localStorage]);
+  }, []);
 
   const form = useForm({
     mode: mode,
@@ -48,14 +49,14 @@ function MantineForm<T extends UserFormDTO>({
       })
     )
       .unwrap()
-      .then((value) => {
+      .then((value : UserFormDTO) => {
         setModalOpened(true);
         setLoading(false);
         setUserData({name: value.name, age: value.age, email: value.email});
         form.reset();
         setNotification(true);
       })
-      .catch((reason) => {
+      .catch((reason : string) => {
         setLoading(false);
         console.log(reason + consoleLog.error);
         form.reset();
@@ -88,9 +89,9 @@ function MantineForm<T extends UserFormDTO>({
         </Button>
       </form>
       <ModalUser
-        name={userData?.name!}
-        email={userData?.email!}
-        age={userData?.age!}
+        name={userData?.name || ''}
+        email={userData?.email || ''}
+        age={userData?.age || 0}
         onClose={() => setModalOpened(false)}
         opened={openModal}
       ></ModalUser>

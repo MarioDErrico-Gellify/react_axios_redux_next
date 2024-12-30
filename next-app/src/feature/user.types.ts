@@ -1,6 +1,6 @@
 import { HttpStatus } from "@/constants/costants";
 
-export type UserFormDTO = {
+ export type UserFormDTO = {
     name: string;
     email: string;
     age: number | undefined;
@@ -14,19 +14,19 @@ export type UserFormDTO = {
   };
 
   export interface UserState {
-    email: any;
-    age: any;
-    name: any;
+    email: string;
+    age: number;
+    name: string;
     isAuthenticated?: boolean | string;
-    user?: any;
-    token?: any;
+    user?: string;
+    token?: string;
     action: string;
     status: HttpStatus;
     error: string;
   }
   export const initialStateUserForm: UserState = {
     name: "",
-    age: null,
+    age: 0,
     email: "",
     status: HttpStatus.Accepted,
     action: '',
