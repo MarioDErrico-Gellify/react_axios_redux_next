@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { UserState, UserFormDTO, initialStateUserForm } from './user.types';
-import axios from 'axios';
-import { HttpStatus } from '@/constants/costants';
+import axios, {AxiosResponse} from 'axios';
+import {consoleLog, HttpStatus} from '@/constants/costants';
 import { USER_ERROR, USER_START, USER_SUCCESS } from './user.action';
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL : string = process.env.NEXT_PUBLIC_API_URL!;
 
 //-------------------------
 
@@ -11,7 +11,7 @@ const initialState = initialStateUserForm;
 
 export const simulateRegisterUser = createAsyncThunk(
   USER_START,
-  async (body: UserFormDTO) => {
+  async (body: UserFormDTO)  => {
     try {
       const config = {
         headers: {
@@ -19,11 +19,11 @@ export const simulateRegisterUser = createAsyncThunk(
         },
       };
       // Simulating delay of 3 seconds
-      await new Promise((resolve) => setTimeout(resolve, 3000));
-      const response = await axios.post(API_URL!, body, config);
-      return response.data as UserFormDTO; 
+      await new Promise((resolve)  => setTimeout(resolve, 3000));
+      const response : AxiosResponse<UserFormDTO> = await axios.post(API_URL!, body, config);
+      return response.data;
     } catch (error) {
-      console.error('Errore durante la chiamata API:', error);
+      console.error(consoleLog.error, error);
       throw error;  
     }
   }
