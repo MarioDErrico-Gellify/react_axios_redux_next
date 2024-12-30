@@ -5,8 +5,7 @@ export interface NotificationProps {
   radius: string;
   title: string;
   message: string;
-  onClose: () => void;
-  opened: boolean;
+  onClose?: () => void;
 }
 
 function NotificationInfo({
@@ -15,7 +14,6 @@ function NotificationInfo({
   title,
   message,
   onClose,
-  opened,
 }: NotificationProps) {
   return (
     <Notification color={color} radius={radius} title={title} onClose={onClose}>

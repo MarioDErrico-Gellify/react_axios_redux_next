@@ -7,31 +7,33 @@ import styles from "./NavBar.module.scss";
 function NavBar() {
   return (
     <div className={styles.navbar}>
-      <NavLink
-        component={Link}
-        href={Paths.homePage}
-        label="HomePage"
-        leftSection={<IconHome2 size="1rem" stroke={1.5} />}
-      />
-      <NavLink
-        component={Link}
-        href={Paths.formMantine}
-        label="GoTo-FormExampleMantine"
-        leftSection={<IconHome2 size="1rem" stroke={1.5} />}
-      />
-      <NavLink
-        component={Link}
-        href={Paths.dashboard}
-        label="dashboard"
-        leftSection={<IconGauge size="1rem" stroke={1} />}
-        rightSection={
-          <IconChevronRight
-            size="0.8rem"
-            stroke={1.5}
-            className="mantine-rotate-rtl"
-          />
-        }
-      />
+      <div className={styles.navLink}>
+        <NavLink
+          component={Link}
+          href={Paths.homePage}
+          label="HomePage"
+          leftSection={<IconHome2 size="1rem" stroke={1.5} />}
+        />
+        <NavLink
+          component={Link}
+          href={Paths.formMantine}
+          label="FormExampleMantine"
+          leftSection={<IconHome2 size="1rem" stroke={1.5} />}
+        />
+        <NavLink
+          component={Link}
+          href={Paths.dashboard}
+          label="dashboard"
+          leftSection={<IconGauge size="1rem" stroke={1} />}
+          rightSection={
+            <IconChevronRight
+              size="0.8rem"
+              stroke={1.5}
+              className="mantine-rotate-rtl"
+            />
+          }
+        />
+      </div>
     </div>
   );
 }

@@ -1,15 +1,12 @@
+import {useState} from "react";
 import {useForm} from "@mantine/form";
 import {TextInput, Button, Container, Loader} from "@mantine/core";
 import {MantineFormDTO} from "@/service/userFormTypes";
-import {registerUser} from "@/service/userFormService";
-import {useState} from "react";
-import {consoleLog} from "@/constants/costants";
 import {validateForm} from "@/utils/validateFunction/validateFormOne";
-import CardUser from "./modalUser";
-import NotificationInfo from "./notification/Notification";
 import ModalUser from "./modalUser";
-
-//-----------------------------
+import NotificationInfo from "./notification/Notification";
+import {useAppDispatch} from "@/hook/hooks";
+import {registerUser} from "@/feature/user.slice";
 
 type genericPropsMantine<T> = {
   labels: string[];
@@ -18,14 +15,13 @@ type genericPropsMantine<T> = {
   mode?: "uncontrolled" | "controlled";
 };
 
-//-----------------------------
-
 function MantineForm<T extends MantineFormDTO>({
   labels,
   placeholders,
   buttonLabel,
   mode,
 }: genericPropsMantine<T>) {
+  const dispatch = useAppDispatch();
   const [openModal, setModalOpened] = useState(false);
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState<MantineFormDTO>();
@@ -37,31 +33,33 @@ function MantineForm<T extends MantineFormDTO>({
     validate: validateForm,
   });
 
-  async function handleSubmit(values: MantineFormDTO) {
+  async function handleSubmit(param: MantineFormDTO) {
     setLoading(true);
-    try {
-      const response = await registerUser(values);
-      setUserData({
-        name: response.name,
-        email: response.email,
-        age: response.age,
+    dispatch(
+      registerUser({
+        email: param.email,
+        name: param.name,
+        age: param.age,
+      })
+    )
+      .unwrap()
+      .then((value) => {
+        setModalOpened(true);
+        setLoading(false);
+        setUserData({name: value.name, age: value.age, email: value.email});
+        form.reset();
+        setNotification(true);
+      })
+      .catch((reason) => {
+        setLoading(false);
+        console.log(reason);
+        form.reset();
       });
-      setModalOpened(true);
-      form.reset();
-    } catch (error) {
-      console.error(consoleLog.error, error);
-    } finally {
-      setLoading(false);
-      console.info(userData);
-      setNotification(true);
-    }
   }
 
   function disableButton(): boolean {
     return !form.values.name || !form.values.email || !form.values.age;
   }
-
-  //-----------------------------
 
   return (
     <Container>
@@ -87,13 +85,17 @@ function MantineForm<T extends MantineFormDTO>({
         onClose={() => setModalOpened(false)}
         opened={openModal}
       ></ModalUser>
-      {/* <NotificationInfo
-        color={"green"}
-        radius={"10"}
-        title={"success"}
-        message={"all done!"}
-        onClose={() => setModalOpened(false)}
-      ></NotificationInfo> */}
+      {notification && (
+        <NotificationInfo
+          color={"green"}
+          radius={"10"}
+          title={"Success"}
+          message={
+            "if you go to the dashboard page, you can see the Redux useAppSelector information"
+          }
+          onClose={() => setNotification(false)}
+        />
+      )}
     </Container>
   );
 }

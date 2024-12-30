@@ -3,7 +3,13 @@
       flex-direction: row;
       width: 100%;
       align-items: center;
-      background-color: cadetblue;
+      background-color: rgb(235, 99, 72);
       border-bottom: 1px solid;
+
+}
+.navLink{
+      align-items: start !important;
+      display: flex;
+      flex-direction: row;
 }
   

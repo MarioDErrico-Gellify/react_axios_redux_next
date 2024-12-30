@@ -11,10 +11,13 @@
   "dependencies": {
     "@mantine/core": "^7.15.2",
     "@mantine/form": "^7.15.2",
+    "@reduxjs/toolkit": "^2.5.0",
     "@tabler/icons-react": "^3.26.0",
+    "axios": "^1.7.9",
     "next": "15.1.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-redux": "^9.2.0",
     "sass": "^1.83.0"
   },
   "devDependencies": {
