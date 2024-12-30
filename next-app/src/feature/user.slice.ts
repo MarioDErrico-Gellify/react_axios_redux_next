@@ -1,33 +1,27 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { UserState, MantineFormDTO } from './user.types';
+import { UserState, UserFormDTO, initialStateUserForm } from './user.types';
 import axios from 'axios';
 import { HttpStatus } from '@/constants/costants';
 import { USER_ERROR, USER_START, USER_SUCCESS } from './user.action';
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-const initialState: UserState = {
-  name: "",
-  age: null,
-  email: "",
-  status: HttpStatus.Accepted,
-  action: '',
-  error: '',
-};
+//------------------------
 
-export const registerUser = createAsyncThunk(
+const initialState = initialStateUserForm;
+
+export const simulateRegisterUser = createAsyncThunk(
   USER_START,
-  async (body: MantineFormDTO) => {
+  async (body: UserFormDTO, _rejectedWithValue) => {
     try {
       const config = {
         headers: {
           'Content-Type': 'application/json',
         },
       };
-      // Simulating delay of 4 seconds
-      await new Promise((resolve) => setTimeout(resolve, 4000));
+      // Simulating delay of 3 seconds
+      await new Promise((resolve) => setTimeout(resolve, 3000));
       const response = await axios.post(API_URL!, body, config);
-      console.log('Dati ricevuti dalla chiamata API:', response.data, HttpStatus.OK);
-      return response.data; 
+      return response.data as UserFormDTO; 
     } catch (error) {
       console.error('Errore durante la chiamata API:', error);
       throw error;  
@@ -41,24 +35,24 @@ const authSlice = createSlice({
   reducers: {}, 
   extraReducers(builder) {
     builder
-      .addCase(registerUser.pending, (state: UserState) => {
+      .addCase(simulateRegisterUser.pending, (state: UserState) => {
         state.action = USER_START;
         state.status = HttpStatus.Created;
         state.error = '';
       })
-      .addCase(registerUser.fulfilled, (state: UserState, action) => {
+      .addCase(simulateRegisterUser.fulfilled, (state: UserState, action) => {
         state.action = USER_SUCCESS;
         state.status = HttpStatus.OK,
         state.error = '';
-        state.isAuthenticated = true;
-      
+        state.isAuthenticated = 'true';
         if (action.payload) {
-          state.name = action.payload.name || '';
-          state.age = action.payload.age || 0;
-          state.email = action.payload.email || '';
+          state.name = action.payload.name;
+          state.age = action.payload.age;
+          state.email = action.payload.email;
+          localStorage.setItem('ADDED_NEW_USER', state.isAuthenticated);
         }
       })
-      .addCase(registerUser.rejected, (state: UserState, action: any) => {
+      .addCase(simulateRegisterUser.rejected, (state: UserState, action : any) => {
         state.action = USER_ERROR;
         state.status = HttpStatus.Bad_Request;
         state.error = action.error?.response?.data?.message || 'An unknown error occurred';

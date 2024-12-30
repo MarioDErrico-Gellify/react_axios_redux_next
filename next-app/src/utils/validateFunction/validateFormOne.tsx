@@ -1,7 +1,7 @@
-import {MantineFormDTO} from "@/service/userFormTypes";
 import {constants} from "@/constants/costants";
+import {UserFormDTO} from "@/feature/user.types";
 
-export const validateForm = (values: MantineFormDTO) => {
+export const validateForm = (values: UserFormDTO) => {
   const errors: {[key: string]: string | null} = {};
 
   errors.name =
@@ -10,7 +10,19 @@ export const validateForm = (values: MantineFormDTO) => {
     ? "Invalid email"
     : null;
 
-  errors.age = values.age < 18 ? "You must be at least 18 to register" : null;
+  switch (true) {
+    case isNaN(Number(values.age)):
+      errors.age = "Age must be a valid number";
+      break;
+    case values.age! < 18:
+      errors.age = "You must be at least 18 to register";
+      break;
+    case values.age! > 100:
+      errors.age = "LoL (<>)";
+      break;
+    default:
+      errors.age = null;
+  }
 
   return errors;
 };

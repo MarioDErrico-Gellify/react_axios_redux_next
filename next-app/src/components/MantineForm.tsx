@@ -1,13 +1,13 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useForm} from "@mantine/form";
 import {TextInput, Button, Container, Loader} from "@mantine/core";
-import {MantineFormDTO} from "@/service/userFormTypes";
 import {validateForm} from "@/utils/validateFunction/validateFormOne";
 import ModalUser from "./modalUser";
 import NotificationInfo from "./notification/Notification";
 import {useAppDispatch} from "@/hook/hooks";
-import {registerUser} from "@/feature/user.slice";
+import {simulateRegisterUser} from "@/feature/user.slice";
 import {consoleLog} from "@/constants/costants";
+import {UserFormDTO} from "@/feature/user.types";
 
 type genericPropsMantine<T> = {
   labels: string[];
@@ -16,7 +16,7 @@ type genericPropsMantine<T> = {
   mode?: "uncontrolled" | "controlled";
 };
 
-function MantineForm<T extends MantineFormDTO>({
+function MantineForm<T extends UserFormDTO>({
   labels,
   placeholders,
   buttonLabel,
@@ -25,19 +25,23 @@ function MantineForm<T extends MantineFormDTO>({
   const dispatch = useAppDispatch();
   const [openModal, setModalOpened] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [userData, setUserData] = useState<MantineFormDTO>();
+  const [userData, setUserData] = useState<UserFormDTO>();
   const [notification, setNotification] = useState(false);
+
+  useEffect(() => {
+    console.log(localStorage.getItem("ADDED_NEW_USER"));
+  }, [localStorage]);
 
   const form = useForm({
     mode: mode,
-    initialValues: {name: "", email: "", age: 18},
+    initialValues: {name: "", email: "", age: undefined},
     validate: validateForm,
   });
 
-  async function handleSubmit(param: MantineFormDTO) {
+  async function handleSubmit(param: UserFormDTO) {
     setLoading(true);
     dispatch(
-      registerUser({
+      simulateRegisterUser({
         email: param.email,
         name: param.name,
         age: param.age,
@@ -74,9 +78,13 @@ function MantineForm<T extends MantineFormDTO>({
             />
           </div>
         ))}
-        <Button type="submit" mt="lg" disabled={disableButton()}>
+        <Button
+          type="submit"
+          mt="lg"
+          disabled={disableButton()}
+          loading={loading}
+        >
           {buttonLabel}
-          {loading && <Loader color="lime" />}
         </Button>
       </form>
       <ModalUser

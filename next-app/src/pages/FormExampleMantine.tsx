@@ -1,12 +1,12 @@
 import MantineForm from "@/components/MantineForm";
 import {labelsForFormOne, placeholdersForFormOne} from "@/constants/costants";
-import {MantineFormDTO} from "@/feature/user.types";
+import {UserFormDTO} from "@/feature/user.types";
 import {Container} from "@mantine/core";
 
 export default function FormExampleMantine() {
   return (
     <Container>
-      <MantineForm<MantineFormDTO>
+      <MantineForm<UserFormDTO>
         mode={"controlled"}
         labels={labelsForFormOne}
         placeholders={placeholdersForFormOne}

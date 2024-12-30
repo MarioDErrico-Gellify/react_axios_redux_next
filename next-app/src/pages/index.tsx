@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import {Card, Text, List, Container, TextInput, Button} from "@mantine/core";
 import {sortNumbers} from "@/utils/sortNumber";
-import {type} from "os";
 
 export default function App() {
   const [inputValue, setInputValue] = useState("");
