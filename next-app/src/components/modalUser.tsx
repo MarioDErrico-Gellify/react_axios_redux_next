@@ -1,4 +1,4 @@
-import {Modal} from "@mantine/core";
+import { Modal } from "@mantine/core";
 
 type CardProps = {
   name: string;
@@ -8,7 +8,7 @@ type CardProps = {
   opened: boolean;
 };
 
-function ModalUser({name, email, age, onClose, opened}: CardProps) {
+function ModalUser({ name, email, age, onClose, opened }: CardProps) {
   return (
     <Modal opened={opened} onClose={onClose} title="Added User">
       <p>{name}</p>

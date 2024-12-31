@@ -1,7 +1,7 @@
-import { useForm } from "react-hook-form";
-import { constants } from "../../Lib/constants";
-import { registerUser } from "../../service/userservice";
-import { useState } from "react";
+import {useForm} from "react-hook-form";
+import {constants} from "../../Lib/constants";
+import {registerUser} from "../../service/userservice";
+import {useState} from "react";
 import {
   FormWrapper,
   InputGroup,
@@ -10,14 +10,15 @@ import {
   ErrorMessage,
   Button,
 } from "./style";
-import { registerFormDto } from "../../service/userTypes";
+import {registerFormDto} from "../../service/userTypes";
 
 function RegisterForm() {
+  const dispatch = useAppDispatch();
   const [notificationMessage, setNoficationMessage] = useState<string>();
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: {errors},
   } = useForm<registerFormDto>();
 
   async function addUser(data: registerFormDto) {
