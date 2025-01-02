@@ -27,9 +27,9 @@ function MantineForm({
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState<UserFormDTO>();
   const [notification, setNotification] = useState(false);
-
+  const [user, setUser] = useState("");
   useEffect(() => {
-    console.log(localStorage.getItem("ADDED_NEW_USER"));
+    setUser(localStorage.getItem("ADDED_NEW_USER") as string);
   }, []);
 
   const form = useForm({
@@ -48,7 +48,7 @@ function MantineForm({
       setUserData({ name: value.name, age: value.age, email: value.email });
       form.reset();
       setNotification(true);
-    } catch (error: any) {
+    } catch (error) {
       console.log(error + consoleLog.error);
     } finally {
       setLoading(false);
@@ -63,6 +63,7 @@ function MantineForm({
         age={userData?.age || 0}
         onClose={() => setModalOpened(false)}
         opened={openModal}
+        messageToLocalStorage={user + " : added user"}
       ></ModalUser>
     );
   }
@@ -72,7 +73,7 @@ function MantineForm({
       <NotificationInfo
         color={"green"}
         radius={"10"}
-        title={"Success"}
+        title={"user added successfully."}
         message={
           "if you go to the dashboard page, you can see the Redux useAppSelector information"
         }

@@ -1,8 +1,9 @@
-import {Paths} from "@/constants/costants";
-import {NavLink} from "@mantine/core";
-import {IconGauge, IconChevronRight, IconHome2} from "@tabler/icons-react";
+import { Paths } from "@/constants/costants";
+import { NavLink } from "@mantine/core";
+import { IconGauge, IconChevronRight, IconHome2 } from "@tabler/icons-react";
 import Link from "next/link";
 import styles from "./NavBar.module.scss";
+import LanguageSwitcher from "@/components/switch/switch";
 
 function NavBar() {
   return (
