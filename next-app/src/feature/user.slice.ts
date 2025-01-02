@@ -38,38 +38,32 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {},
-  extraReducers(builder: any) {
+  extraReducers(builder) {
     builder
       .addCase(simulateRegisterUser.pending, (state: UserState) => {
         state.action = USER_START;
         state.status = HttpStatus.Created;
         state.error = "";
       })
-      .addCase(
-        simulateRegisterUser.fulfilled,
-        (state: UserState, action: any) => {
-          state.action = USER_SUCCESS;
-          state.status = HttpStatus.OK;
-          state.error = "";
-          state.isAuthenticated = "true";
-          if (action.payload) {
-            state.name = action.payload.name;
+      .addCase(simulateRegisterUser.fulfilled, (state: UserState, action) => {
+        state.action = USER_SUCCESS;
+        state.status = HttpStatus.OK;
+        state.error = "";
+        state.isAuthenticated = "true";
+        if (action.payload) {
+          state.name = action.payload.name;
+          if (action.payload.age != null) {
             state.age = action.payload.age;
-            state.email = action.payload.email;
-            localStorage.setItem("ADDED_NEW_USER", state.isAuthenticated);
           }
-        },
-      )
-      .addCase(
-        simulateRegisterUser.rejected,
-        (state: UserState, action: any) => {
-          state.action = USER_ERROR;
-          state.status = HttpStatus.Bad_Request;
-          state.error =
-            action.error?.response?.data?.message ||
-            "An unknown error occurred";
-        },
-      );
+          state.email = action.payload.email;
+          localStorage.setItem("ADDED_NEW_USER", state.isAuthenticated);
+        }
+      })
+      .addCase(simulateRegisterUser.rejected, (state: UserState) => {
+        state.action = USER_ERROR;
+        state.status = HttpStatus.Bad_Request;
+        state.error = "An unknown error occurred";
+      });
   },
 });
 export default authSlice.reducer;
