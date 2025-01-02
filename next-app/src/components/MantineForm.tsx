@@ -38,34 +38,47 @@ function MantineForm({
     validate: validateForm,
   });
 
-  async function handleSubmit(param: UserFormDTO) {
+  async function handleSubmit({ email, name, age }: UserFormDTO) {
     setLoading(true);
-    dispatch(
-      simulateRegisterUser({
-        email: param.email,
-        name: param.name,
-        age: param.age,
-      }),
-    )
-      .unwrap()
-      .then((value: UserFormDTO) => {
-        setModalOpened(true);
-        setUserData({ name: value.name, age: value.age, email: value.email });
-        form.reset();
-        setNotification(true);
-      })
-      .catch((reason: string) => {
-        setLoading(false);
-        console.log(reason + consoleLog.error);
-        form.reset();
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    try {
+      const value = await dispatch(
+        simulateRegisterUser({ email, name, age }),
+      ).unwrap();
+      setModalOpened(true);
+      setUserData({ name: value.name, age: value.age, email: value.email });
+      form.reset();
+      setNotification(true);
+    } catch (error: any) {
+      console.log(error + consoleLog.error);
+    } finally {
+      setLoading(false);
+    }
   }
 
-  function disableButton(): boolean {
-    return !form.values.name || !form.values.email || !form.values.age;
+  function showModalUser() {
+    return (
+      <ModalUser
+        name={userData?.name || ""}
+        email={userData?.email || ""}
+        age={userData?.age || 0}
+        onClose={() => setModalOpened(false)}
+        opened={openModal}
+      ></ModalUser>
+    );
+  }
+
+  function showNotificationInfo() {
+    return (
+      <NotificationInfo
+        color={"green"}
+        radius={"10"}
+        title={"Success"}
+        message={
+          "if you go to the dashboard page, you can see the Redux useAppSelector information"
+        }
+        onClose={() => setNotification(false)}
+      />
+    );
   }
 
   return (
@@ -83,30 +96,14 @@ function MantineForm({
         <Button
           type="submit"
           mt="lg"
-          disabled={disableButton()}
+          disabled={!form.values.name || !form.values.email || !form.values.age}
           loading={loading}
         >
           {buttonLabel}
         </Button>
       </form>
-      <ModalUser
-        name={userData?.name || ""}
-        email={userData?.email || ""}
-        age={userData?.age || 0}
-        onClose={() => setModalOpened(false)}
-        opened={openModal}
-      ></ModalUser>
-      {notification && (
-        <NotificationInfo
-          color={"green"}
-          radius={"10"}
-          title={"Success"}
-          message={
-            "if you go to the dashboard page, you can see the Redux useAppSelector information"
-          }
-          onClose={() => setNotification(false)}
-        />
-      )}
+      {showModalUser()}
+      {notification && showNotificationInfo()}
     </Container>
   );
 }

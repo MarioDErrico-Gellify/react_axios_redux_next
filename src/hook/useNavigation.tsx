@@ -22,7 +22,7 @@ export function useNavigationLinks() {
   }
 
   const links: NavigationLink[] = [
-    { link: Paths.PAGETREE, label: "api shocase" },
+    { link: Paths.PAGETREE, label: "api showcase" },
     { link: Paths.PAGETWO, label: "hook showcase" },
   ];
   //object to be destructured with { links, isLinkActive }
