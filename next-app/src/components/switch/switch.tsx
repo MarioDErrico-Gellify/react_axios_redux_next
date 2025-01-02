@@ -6,7 +6,7 @@ const LanguageSwitcher = () => {
 
   const handleLanguageChange = (lng: string) => {
     i18n.changeLanguage(lng).then((r) => {
-      console.log(i18n.language);
+      console.log(r);
     });
   };
 

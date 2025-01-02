@@ -20,6 +20,8 @@ i18next
     },
     defaultNS,
   })
-  .then((r) => {});
+  .then((response) => {
+    console.log(response);
+  });
 
 export default i18next;
