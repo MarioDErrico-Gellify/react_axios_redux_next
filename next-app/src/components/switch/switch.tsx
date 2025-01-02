@@ -15,7 +15,7 @@ const LanguageSwitcher = () => {
       style={{
         display: "flex",
         flexDirection: "row",
-        float: "left",
+        float: "right",
       }}
     >
       <Button

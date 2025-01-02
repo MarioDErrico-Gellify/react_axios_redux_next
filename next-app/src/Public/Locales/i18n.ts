@@ -1,9 +1,7 @@
 import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
-import ns1 from "./it.json";
-import ns2 from "./en.json";
-
-export const defaultNS = "ns1";
+import it from "./it.json";
+import en from "./en.json";
 
 i18next
   .use(initReactI18next)
@@ -12,13 +10,12 @@ i18next
     debug: true,
     resources: {
       it: {
-        ns1,
+        translation: it,
       },
       en: {
-        ns2,
+        translation: en,
       },
     },
-    defaultNS,
   })
   .then((response) => {
     console.log(response);

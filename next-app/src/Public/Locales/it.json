@@ -1,4 +1,12 @@
 {
   "exampleForm" : "welcome in next app",
-  "languages" : "app in italiano"
+  "languages" : "app in italiano",
+  "homePage": "Home",
+  "formMantine": "EsempioformMantine",
+  "dashboard": "Dashboard",
+  "inputNumbers": "Inserisci i Numeri",
+  "numbersSeparated": "Numeri separati da virgola",
+  "numbersPlaceholder": "Es: 4, 2, 8, 5",
+  "sortNumbers": "Ordina Numeri",
+  "sortedNumbers": "Numeri Ordinati"
 }
