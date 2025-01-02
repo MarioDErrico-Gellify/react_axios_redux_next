@@ -15,7 +15,7 @@ export default function FormExampleMantine() {
 
   const formattedDate = formatDateToItalianLocale(new Date());
   return (
-    <Container>
+    <Container mt={20}>
       <p>{t("exampleForm")}</p>
       <p>{t("languages")}</p>
       <p>{formattedDate}</p>
