@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Card, Text, List, Container, TextInput, Button } from "@mantine/core";
 import { sortNumbers } from "@/utils/sortNumber";
 
@@ -6,18 +6,23 @@ export default function App() {
   const [inputValue, setInputValue] = useState("");
   const [sortedNumbers, setSortedNumbers] = useState<number[]>([]);
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setInputValue(
-      value.length > 0 && value[value.length - 1] !== "," ? value + "," : value,
-    );
-  };
+  const handleInputChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value;
+      setInputValue(
+        value.length > 0 && value[value.length - 1] !== ","
+          ? value + ","
+          : value,
+      );
+    },
+    [],
+  );
 
-  const handleSubmit = () => {
+  const handleSubmit = useCallback(() => {
     const sorted = sortNumbers(inputValue);
     setSortedNumbers(sorted);
     setInputValue("");
-  };
+  }, [inputValue]);
 
   return (
     <Container>
