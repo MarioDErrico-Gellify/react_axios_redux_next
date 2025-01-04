@@ -8,6 +8,7 @@ import { useAppDispatch } from "@/hook/hooks";
 import { simulateRegisterUser } from "@/feature/user.slice";
 import { consoleLog, typesInput } from "@/constants/costants";
 import { UserFormDTO } from "@/feature/user.types";
+import { handleTypesInGenericForm } from "@/utils/handleTypesOfGenericForm/handleTypesOfGenericForm";
 
 type genericPropsMantine = {
   labels: string[];
@@ -95,12 +96,12 @@ function MantineForm({
   return (
     <Container>
       <form onSubmit={form.onSubmit(handleSubmit)}>
-        {labels.map((label, _value) => (
-          <div key={_value} style={{ marginBottom: "1rem" }}>
+        {labels.map((label, _index) => (
+          <div key={_index} style={{ marginBottom: "1rem" }}>
             <TextInput
-              type={label === "password" ? "password" : "text"}
+              type={handleTypesInGenericForm(labels[_index]) as string}
               label={label}
-              placeholder={placeholders[_value]}
+              placeholder={placeholders[_index]}
               {...form.getInputProps(label.toLowerCase())}
             />
           </div>
