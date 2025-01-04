@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { UserState, UserFormDTO, initialStateUserForm } from "./user.types";
 import axios, { AxiosResponse } from "axios";
 import { consoleLog, HttpStatus } from "@/constants/costants";
@@ -45,18 +45,16 @@ const authSlice = createSlice({
         state.status = HttpStatus.Created;
         state.error = "";
       })
-      .addCase(simulateRegisterUser.fulfilled, (state: UserState, action) => {
+      .addCase(simulateRegisterUser.fulfilled, (state: UserState,  action : PayloadAction<UserFormDTO>) => {
         state.action = USER_SUCCESS;
         state.status = HttpStatus.OK;
         state.error = "";
         state.isAuthenticated = "true";
         if (action.payload) {
           state.name = action.payload.name;
-          if (action.payload.age != null) {
-            state.age = action.payload.age;
-          }
+          state.age = action.payload.age;
           state.email = action.payload.email;
-          localStorage.setItem("ADDED_NEW_USER", state.isAuthenticated);
+          localStorage.setItem('ADDED_NEW_USER', state.isAuthenticated);
         }
       })
       .addCase(simulateRegisterUser.rejected, (state: UserState) => {

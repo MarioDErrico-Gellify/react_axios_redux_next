@@ -1,5 +1,9 @@
 import MantineForm from "@/components/MantineForm";
-import { labelsForFormOne, placeholdersForFormOne } from "@/constants/costants";
+import {
+  labelsForFormOne,
+  placeholdersForFormOne,
+  typesInput,
+} from "@/constants/costants";
 import { Container } from "@mantine/core";
 import { useEffect, useRef } from "react";
 import { formatDateToItalianLocale } from "@/utils/date";

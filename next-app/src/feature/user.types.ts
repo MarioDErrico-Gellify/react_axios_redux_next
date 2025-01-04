@@ -3,7 +3,8 @@ import { HttpStatus } from "@/constants/costants";
 export type UserFormDTO = {
   name: string;
   email: string;
-  age: number | undefined;
+  age: number;
+  password: string;
 };
 
 export type RetrieveFakeDataDto = {

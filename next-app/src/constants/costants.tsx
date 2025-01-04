@@ -1,9 +1,12 @@
-export const labelsForFormOne = ["Name", "Email", "Age"];
+export const labelsForFormOne = ["Name", "Email", "Age", "password"];
 export const placeholdersForFormOne = [
   "Insert name",
   "Insert email",
   "Insert age",
+  "insert password",
 ];
+
+export const typesInput = ["email", "password"];
 
 export enum Paths {
   homePage = "/",
