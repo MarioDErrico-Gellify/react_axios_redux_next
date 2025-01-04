@@ -6,7 +6,7 @@ import ModalUser from "./modalUser";
 import NotificationInfo from "./notification/Notification";
 import { useAppDispatch } from "@/hook/hooks";
 import { simulateRegisterUser } from "@/feature/user.slice";
-import { consoleLog } from "@/constants/costants";
+import { consoleLog, typesInput } from "@/constants/costants";
 import { UserFormDTO } from "@/feature/user.types";
 
 type genericPropsMantine = {
@@ -34,7 +34,12 @@ function MantineForm({
 
   const form = useForm({
     mode: mode || "controlled",
-    initialValues: { name: "", email: "", age: 0 },
+    initialValues: {
+      name: "",
+      email: "",
+      age: 0,
+      password: "",
+    },
     validate: validateForm,
   });
 
@@ -42,10 +47,15 @@ function MantineForm({
     setLoading(true);
     try {
       const value = await dispatch(
-        simulateRegisterUser({ email, name, age }),
+        simulateRegisterUser({ password: "", email, name, age }),
       ).unwrap();
       setModalOpened(true);
-      setUserData({ name: value.name, age: value.age, email: value.email });
+      setUserData({
+        password: "",
+        name: value.name,
+        age: value.age,
+        email: value.email,
+      });
       form.reset();
       setNotification(true);
     } catch (error) {
@@ -88,6 +98,7 @@ function MantineForm({
         {labels.map((label, _value) => (
           <div key={_value} style={{ marginBottom: "1rem" }}>
             <TextInput
+              type={label === "password" ? "password" : "text"}
               label={label}
               placeholder={placeholders[_value]}
               {...form.getInputProps(label.toLowerCase())}
