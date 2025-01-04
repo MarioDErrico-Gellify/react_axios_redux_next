@@ -29,7 +29,6 @@ export default function FormExampleMantine() {
         labels={labelsForFormOne}
         placeholders={placeholdersForFormOne}
         buttonLabel="Submit"
-        typeInput={typesInput}
       />
     </Container>
   );
