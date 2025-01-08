@@ -16,9 +16,16 @@ Axios: Axios is used for making HTTP requests to external APIs.
 # Styled Components:
 
 The application uses Styled Components for styling, intentionally skipping frameworks like Material UI or other pre-built component libraries. This choice was made to have more control over the styling and to customize the look and feel of the application more flexibly.
-Current Status:
 
+# Current Status:
 Work in Progress: Some features, such as internationalization and certain hooks, are still being finalized.
-Future Improvements:
 
+# Future Improvements:
 Further optimization and testing are planned to ensure the app is fully functional and ready for production.
+
+# Additional Notes:
+In the next-app folder, you can find an example application built with Next.js that includes:
+
+**_A dynamically managed form (experimental and not following best practices).
+Integration with Redux Toolkit for state management.
+Support for i18n (internationalization) and more._**
