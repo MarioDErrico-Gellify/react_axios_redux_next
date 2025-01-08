@@ -1,9 +1,19 @@
-export const labelsForFormOne = ["Name", "Email", "Age", "password"];
+export const labelsForFormOne = [
+  "Name",
+  "Email",
+  "Age",
+  "password",
+  "password_confirmation",
+  "input",
+];
 export const placeholdersForFormOne = [
+  //TODO add i18n
   "Insert name",
   "Insert email",
   "Insert age",
   "insert password",
+  "password_confirmation",
+  "selection file",
 ];
 
 export const typesInput = ["email", "password"];
