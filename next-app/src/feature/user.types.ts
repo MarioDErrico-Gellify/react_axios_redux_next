@@ -4,7 +4,8 @@ export type UserFormDTO = {
   name: string;
   email: string;
   age: number;
-  password: string;
+  password?: string;
+  password_confirmation?: string;
 };
 
 export type RetrieveFakeDataDto = {

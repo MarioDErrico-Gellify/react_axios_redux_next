@@ -17,7 +17,7 @@ type genericPropsMantine = {
   mode?: "uncontrolled" | "controlled";
 };
 
-function MantineForm({
+function Ab_form({
   labels,
   placeholders,
   buttonLabel,
@@ -40,6 +40,7 @@ function MantineForm({
       email: "",
       age: 0,
       password: "",
+      password_confirmation: "",
     },
     validate: validateForm,
   });
@@ -48,11 +49,16 @@ function MantineForm({
     setLoading(true);
     try {
       const value = await dispatch(
-        simulateRegisterUser({ password: "", email, name, age }),
+        simulateRegisterUser({
+          password_confirmation: "",
+          password: "",
+          email,
+          name,
+          age,
+        }),
       ).unwrap();
       setModalOpened(true);
       setUserData({
-        password: "",
         name: value.name,
         age: value.age,
         email: value.email,
@@ -121,4 +127,4 @@ function MantineForm({
   );
 }
 
-export default MantineForm;
+export default Ab_form;
