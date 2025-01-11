@@ -12,6 +12,7 @@ export default function App() {
   const sorted = useSortedNumbers(inputValue);
 
   useEffect(() => {
+    /*simulated a fetch to all user to backend, skipped redux*/
     const fetchUsers = async () => {
       try {
         const response = await axios.get("http://localhost:8080/users/getAll");
