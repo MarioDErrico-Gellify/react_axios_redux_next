@@ -12,10 +12,6 @@ export const validateForm = (values: UserFormDTO) => {
   errors.password = !constants.PASSWORD_REGEX.test(values.password!)
     ? "Invalid password"
     : null;
-  errors.password_confirmation =
-    values.password != values.password_confirmation
-      ? "password not match"
-      : null;
 
   switch (true) {
     case isNaN(Number(values.age)):
