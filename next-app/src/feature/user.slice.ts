@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserState, UserFormDTO, initialStateUserForm } from "./user.types";
 import axios, { AxiosResponse } from "axios";
 import { consoleLog, HttpStatus } from "@/constants/costants";
@@ -19,10 +19,8 @@ export const simulateRegisterUser = createAsyncThunk(
           "Content-Type": "application/json",
         },
       };
-      // Simulating delay of 3 seconds
-      await new Promise((resolve) => setTimeout(resolve, 3000));
       const response: AxiosResponse<UserFormDTO> = await axios.post(
-        API_URL!,
+        `${API_URL}/add`,
         body,
         config,
       );
@@ -45,18 +43,21 @@ const authSlice = createSlice({
         state.status = HttpStatus.Created;
         state.error = "";
       })
-      .addCase(simulateRegisterUser.fulfilled, (state: UserState,  action : PayloadAction<UserFormDTO>) => {
-        state.action = USER_SUCCESS;
-        state.status = HttpStatus.OK;
-        state.error = "";
-        state.isAuthenticated = "true";
-        if (action.payload) {
-          state.name = action.payload.name;
-          state.age = action.payload.age;
-          state.email = action.payload.email;
-          localStorage.setItem('ADDED_NEW_USER', state.isAuthenticated);
-        }
-      })
+      .addCase(
+        simulateRegisterUser.fulfilled,
+        (state: UserState, action: PayloadAction<UserFormDTO>) => {
+          state.action = USER_SUCCESS;
+          state.status = HttpStatus.OK;
+          state.error = "";
+          state.isAuthenticated = "true";
+          if (action.payload) {
+            state.name = action.payload.name;
+            state.age = action.payload.age;
+            state.email = action.payload.email;
+            localStorage.setItem("ADDED_NEW_USER", state.isAuthenticated);
+          }
+        },
+      )
       .addCase(simulateRegisterUser.rejected, (state: UserState) => {
         state.action = USER_ERROR;
         state.status = HttpStatus.Bad_Request;
@@ -64,4 +65,5 @@ const authSlice = createSlice({
       });
   },
 });
+
 export default authSlice.reducer;
