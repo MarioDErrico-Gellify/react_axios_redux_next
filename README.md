@@ -1,6 +1,4 @@
-# react_axios
-
-# Created with CodeSandbox
+# fe project
 
 The project is currently a work in progress, and I am continuously working on enhancing its features and functionality. The purpose of this project is to demonstrate my skills in React, hooks, routing, and internationalization (i18n), as well as my ability to work with APIs using Axios.
 
